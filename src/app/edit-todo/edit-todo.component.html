@@ -1,0 +1,33 @@
+<div class="edit-todo-wrapper container has-blurred-white-bg">
+  <h2 class="is-bold">Editar Tarea</h2>
+
+  <p *ngIf="!todo">Tarea no encontrada</p>
+
+  <form #form="ngForm" (ngSubmit)="onFormSubmit(form)" *ngIf="todo">
+    <div class="form-field">
+      <input
+        class="textbox"
+        [ngModel]="todo.text"
+        #textField="ngModel"
+        name="text"
+        type="text"
+        placeholder="Ingrese su tarea..."
+        required
+        minlength="3"
+      />
+      <ng-container *ngIf="textField.invalid">
+        <p *ngIf="textField.errors.required">
+          Por favor, introduzca un texto para esta tarea
+        </p>
+        <p *ngIf="textField.errors.minlength">
+          El texto de tareas pendientes debe tener al menos 3 caracteres.
+        </p>
+      </ng-container>
+    </div>
+
+    <div class="btns-container">
+      <a routerLink="../" class="btn">Cancelar</a>
+      <button class="btn align-end">Guardar</button>
+    </div>
+  </form>
+</div>
